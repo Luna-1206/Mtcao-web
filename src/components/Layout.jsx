@@ -25,6 +25,7 @@ const MENU = [
             </svg>
         ),
     },
+    // Okay
     {
         label: 'Manage Destination',
         path: '/destinations',
