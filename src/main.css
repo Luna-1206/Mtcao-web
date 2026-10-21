@@ -1,0 +1,531 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,600;1,700&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+
+
+/* ---------- Login page ---------- */
+
+/* Full screen with the forest picture behind */
+#landing {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: grid;
+    grid-template-columns: 1fr minmax(340px, 46%);
+    background: linear-gradient(rgba(8,38,22,.2), rgba(8,38,22,.2)), var(--forest) center/cover;
+    overflow: auto;
+}
+
+/* Left side: seal */
+.lseal { display: grid; place-items: center; padding: 24px; }
+.lseal img { width: min(370px, 60%); filter: drop-shadow(0 6px 18px rgba(0,0,0,.35)); }
+
+/* Right side: white panel */
+.lpanel {
+    margin: 14px;
+    border-radius: 22px;
+    background: rgba(255,255,255,.84);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    padding: 22px 28px;
+    color: #1f3d1f;
+    min-height: 0;
+}
+
+/* Content inside the panel */
+.lv {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 14px;
+}
+.lv h1 { font-size: clamp(44px, 7vw, 68px); color: #2e5a2a; letter-spacing: .02em; }
+.lv h1.sm { font-size: 40px; }
+.lv p { max-width: 330px; line-height: 1.5; font-size: 16px; }
+
+/* Form */
+.lform { display: grid; gap: 12px; width: min(320px, 100%); text-align: left; margin-top: 6px; }
+.lform label { display: grid; gap: 5px; font-size: 12px; font-weight: 600; }
+.lform input {
+    padding: 11px 12px;
+    border: 1px solid #b9cdb4;
+    border-radius: 8px;
+    background: #fff;
+    font: inherit;
+    color: #10281c;
+}
+
+/* Password box with the eye button inside */
+.pw { position: relative; display: block; }
+.pw input { width: 100%; padding-right: 44px; }
+.pwt {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border: 0;
+    background: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #58706a;
+    display: grid;
+    place-items: center;
+    padding: 0;
+}
+.pwt:hover { color: #2e5a2a; }
+.pwt:focus-visible { outline: 2px solid #2e5a2a; }
+.pwt svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Error text */
+.lerr { color: #c8452d; font-size: 13px; font-weight: 600; margin: 0; max-width: none; }
+
+/* Login button */
+.go {
+    background: #2e5a2a;
+    color: #fff;
+    border: 0;
+    border-radius: 999px;
+    padding: 11px 30px;
+    font: 600 14px 'Source Sans 3', sans-serif;
+    cursor: pointer;
+}
+.go:hover { background: #244a21; }
+.go:disabled { opacity: .7; cursor: default; }
+
+/* "Forgot password?" link-style button */
+.flink {
+    background: none;
+    border: 0;
+    padding: 0;
+    margin-top: 2px;
+    justify-self: end;
+    color: #2e5a2a;
+    font: 600 13px 'Source Sans 3', sans-serif;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.flink:hover { color: #244a21; }
+
+/* Small screens: seal goes on top */
+@media (max-width: 760px) {
+    #landing { grid-template-columns: 1fr; }
+    .lseal img { width: 200px; }
+    .lpanel { margin: 0 12px 12px; }
+}
+
+
+
+/* --------- LANDING PAGE --------- */
+
+/* Colors and the forest picture. Used with var(--name) */
+:root {
+    --bg: #eaf5f6;
+    --card: #fff;
+    --ink: #10281c;
+    --mut: #58706a;
+    --line: #d6e6e3;
+    --navy: #0f4c4a;
+    --navy2: #1b6b66;
+    --or: #e9b872;
+    --head: #eef7f5;
+    --forest: url('/forest.jpg');
+}
+
+* { box-sizing: border-box; }
+
+/* Make the React #root box "disappear" so the grid below works */
+#root { display: contents; }
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 15px "Source Sans 3", "Segoe UI", sans-serif;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+}
+
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-family: Fraunces, Georgia, serif; letter-spacing: -.01em; }
+img { max-width: 100%; }
+
+/* Sidebar */
+aside {
+    background: linear-gradient(rgba(8,38,22,.72), rgba(8,38,22,.9)), var(--forest) center/cover;
+    color: #fff;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 16px;
+}
+.logo img { width: 170px; height: 170px; }
+
+nav { display: flex; flex-direction: column; gap: 2px; }
+
+nav button {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: none;
+    border: 0;
+    border-left: 3px solid transparent;
+    color: #cfe3dc;
+    font: 500 13px 'Source Sans 3', sans-serif;
+    padding: 12px 14px;
+    cursor: pointer;
+    text-align: left;
+    border-radius: 4px;
+}
+nav button:hover, nav button:focus-visible { background: rgba(255,255,255,.07); outline: none; }
+
+/* The open page: highlighted */
+nav button[aria-current] { background: var(--navy2); border-left-color: var(--or); color: #fff; }
+
+nav svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; flex: none; }
+
+/* Right side */
+.main {
+    min-width: 0;
+    background: linear-gradient(180deg, #dff1f6 0%, #eef7f3 40%, #fbf5e6 100%);
+}
+
+/* Topbar */
+.top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255,255,255,.82);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 28px;
+}
+.top h2 { font-size: 17px; }
+.top > div:first-child { margin-right: auto; }
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+}
+.user small { display: block; font-size: 10px; color: var(--mut); font-weight: 500; letter-spacing: .5px; }
+
+/* Avatar circle with initials */
+.av {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 12px;
+    flex: none;
+}
+
+/* Page area */
+.wrap { padding: 24px 28px; }
+
+.hd {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+}
+.hd h1 { font-size: 24px; }
+.hd p { color: var(--mut); font-size: 13px; margin-top: 4px; }
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(20,30,80,.05);
+}
+.empty { padding: 28px; text-align: center; color: var(--mut); }
+
+/* Small screens: sidebar goes on top */
+@media (max-width: 760px) {
+    body { grid-template-columns: 1fr; }
+    aside { position: static; height: auto; }
+    nav { flex-direction: row; flex-wrap: wrap; }
+    .user div { display: none; }
+    .wrap { padding: 16px; }
+    .top { padding: 12px 16px; }
+}
+
+
+
+
+/* ---------- Buttons ---------- */
+
+/* Main button, and the outline version (btn o) */
+.btn {
+    background: var(--navy);
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    padding: 9px 16px;
+    font: 600 12px 'Source Sans 3', sans-serif;
+    cursor: pointer;
+}
+.btn:hover { background: var(--navy2); }
+.btn.o { background: none; color: var(--navy); border: 1px solid var(--line); }
+.btn:disabled { opacity: .7; cursor: default; }
+
+/* ---------- Search bar and filters ---------- */
+
+.bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.bar input { flex: 1; min-width: 180px; }
+.bar input,
+.bar select {
+    background: var(--card);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 9px 14px;
+    font: 500 13px 'Source Sans 3', sans-serif;
+    cursor: pointer;
+}
+
+
+
+
+/* ---------- Destination cards ---------- */
+
+/* The grid. Each card has the same height */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 18px;
+    align-items: stretch;
+    grid-auto-rows: 1fr;
+}
+.dc { padding: 18px; display: flex; flex-direction: column; }
+
+/* The colored top part with the category name */
+.dc .ph {
+    height: 200px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #5f8a2e, #2a6fa0);
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+
+/* Name on the left, Edit and Archive icons on the right */
+.dc .head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.dc h4 { margin: 0 0 3px; font-size: 17px; }
+.dc .tools { display: flex; gap: 2px; margin: -4px -6px 0 0; }
+
+/* Short description, cut after 3 lines */
+.dc .info {
+    margin: 10px 0 0;
+    line-height: 1.5;
+    font-size: 12px;
+    color: var(--mut);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: calc(1.5em * 3);
+}
+
+/* Small icon buttons (Edit and Archive) */
+.ico {
+    background: none;
+    border: 0;
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--mut);
+    display: inline-grid;
+    place-items: center;
+}
+.ico:hover { background: var(--head); color: var(--ink); }
+.ico.del:hover { color: #d93025; }
+.ico svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+}
+
+/* Details list (Status, Available time, Estimated cost, Activities) */
+.dl {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 6px 8px;
+    margin: 12px 0 0;
+    font-size: 12px;
+    line-height: 1.4;
+}
+.dl dt { color: var(--mut); }
+.dl dd { margin: 0; font-weight: 600; }
+
+
+
+
+/* ---------- "Are you sure?" dialog ---------- */
+
+/* Dark background over the whole screen */
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(8, 38, 22, .6);
+    backdrop-filter: blur(2px);
+    display: grid;
+    place-items: center;
+}
+
+/* The white box in the middle */
+.confirm {
+    background: var(--card);
+    color: var(--ink);
+    border-radius: 12px;
+    width: min(380px, 92vw);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .35);
+}
+.confirm h3 { padding: 20px 24px 14px; font-size: 17px; }
+.confirm p { padding: 0 24px 18px; color: var(--mut); line-height: 1.5; }
+
+/* Cancel and Confirm buttons */
+.acts { display: flex; justify-content: flex-end; gap: 10px; }
+.confirm .acts { padding: 0 24px 22px; }
+
+
+
+
+/* ---------- Add / Edit form ---------- */
+
+/* The white box. Scrolls inside if the screen is short */
+.formbox {
+    background: var(--card);
+    color: var(--ink);
+    border-radius: 12px;
+    width: min(520px, 94vw);
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .35);
+}
+.formbox h3 { padding: 20px 24px 6px; font-size: 17px; }
+
+/* All the fields stacked with space between them */
+.f { display: grid; gap: 14px; padding: 14px 24px 22px; }
+.f label { display: grid; gap: 5px; font-size: 12px; font-weight: 600; }
+
+/* Text boxes, dropdowns, and the description box */
+.f input,
+.f select,
+.f textarea {
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #fff;
+    color: var(--ink);
+    font: 500 13px 'Source Sans 3', sans-serif;
+}
+.f textarea { resize: vertical; }
+
+/* The two time boxes (From and To) side by side */
+.tr { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* A little space above Cancel and Save */
+.f .acts { margin-top: 4px; }
+
+
+
+/* ------------------------------------------- */
+/* ---------- "Open daily" checkbox ---------- */
+/* ------------------------------------------- */
+
+/* Checkbox and its text side by side, not stacked */
+.f label.checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+/* A normal small checkbox, not stretched like the text boxes */
+.f .checkbox-row input {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    accent-color: var(--navy);
+}
+
+
+
+/* ---------------------------------- */
+/* ----------- Map picker ----------- */
+/* ---------------------------------- */
+
+/* The "Location" part of the form: a title, then the map, then a hint */
+.map-field {
+    display: grid;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* The map and the hint text under it */
+.map-picker {
+    display: grid;
+    gap: 6px;
+}
+
+/* The map itself. It needs a height, or it will not show at all */
+.map-box {
+    width: 100%;
+    height: 260px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    z-index: 0;
+}
+
+/* Small text under the map */
+.map-hint {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--mut);
+}

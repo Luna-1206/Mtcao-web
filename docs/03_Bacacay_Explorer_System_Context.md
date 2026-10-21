@@ -106,7 +106,7 @@ One collection per entity; reference by ID (like a foreign key) except where not
 | review_photos | field `photos[]` on review | imageUrl |
 | itineraries | `tourists/{uid}/itineraries/{itinId}` | name, budget, isArchived, createdAt |
 | itinerary_stops | `tourists/{uid}/itineraries/{itinId}/stops/{stopId}` | destinationId, destinationName, activity, visitDate (`YYYY-MM-DD`), visitTime (`HH:mm`), estimatedCost, notes |
-| sms_reminders | `smsLogs/{autoId}` | touristId, type, phone, message, status, providerMessageId, error, createdAt (a log only; duplicates are prevented by the timestamp fields on the tourist document) |
+| sms_reminders | `smsLogs/{autoId}` | touristId, type, phone, message, status, providerMessageId, error, sentAt (a log only; duplicates are prevented by the timestamp fields on the tourist document) |
 
 ### Allowed values (enums)
 
